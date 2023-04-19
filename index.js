@@ -1,10 +1,39 @@
-// let clockColor = '#000000';
-// let backgroundColor = 'FFFDDD';
+// Cookie decoder no w3schools
 
-let clockColor = '#0F0';
-let backgroundColor = '#000';
+function getCookie(cname){
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for(let i = 0; i <ca.length; i++) {
+      let c = ca[i];
+      while(c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if(c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+}
+
+
+// ielādē krāsas no saglabātā cookie
+
+switch(getCookie("lightmode")){
+    case "0":
+        var clockColor = '#0F0';
+        var backgroundColor = '#000';
+        console.log("Light mode DISABLED");
+        break;
+    case "1":
+        var clockColor = '#000000';
+        var backgroundColor = '#FFFDDD';
+        console.log("Light mode ENABLED");
+        break;
+}
 
 // background krāsas nomaiņa pēc iestatījumiem
+
 window.addEventListener("load",function() { changeColors(backgroundColor, clockColor) });
 
 let canvas = document.getElementById("clockcanva");
@@ -35,6 +64,35 @@ let months = [
     "November",
     "December"
 ];
+
+
+function colorMode(){
+    let lm;
+
+    if(getCookie("lightmode") == "1"){
+        lm = 0;
+    }
+    else {
+        lm = 1;
+    }
+
+    document.cookie = "lightmode=" + lm + "; expires=Thu, 18 Mar 2027 12:00:00 UTC; path=/; SameSite=Lax";
+
+    switch(getCookie("lightmode")){
+        case "0":
+            clockColor = '#0F0';
+            backgroundColor = '#000';
+            console.log("Light mode DISABLED");
+            break;
+        case "1":
+            clockColor = '#000000';
+            backgroundColor = '#FFFDDD';
+            console.log("Light mode ENABLED");
+            break;
+    }
+    changeColors(backgroundColor, clockColor);
+}
+
 
 function drawClock(){
     const d = new Date();
@@ -116,7 +174,7 @@ function drawClock(){
     ctx.rotate((sec + ms/1000) * 6 * Math.PI / 180);
     ctx.fillRect(-2,0,4,-130)
 
-    // console.log(sec + ms /1000);
+    // datuma galotne (1st, 2nd, 3rd, 4th)    
     
     switch(d.getDate){
         case 1:
@@ -134,6 +192,8 @@ function drawClock(){
     }
 
 
+   // laika izvade teksta formā
+
     datums.innerHTML =
     weekday[d.getDay()] + " " +
     d.getDate() + dayEnd + " " +
@@ -149,5 +209,5 @@ function changeColors(bgColor, altColor) {
     document.getElementById("datums").style.color = altColor;
 }
 
-// drawClock();
+// zīmē pulksteni ik pēc 16ms, (60 reizes sekundē)
 setInterval(drawClock, 16);
