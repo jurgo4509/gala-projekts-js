@@ -1,0 +1,20 @@
+body {
+    background-color: #FFFDDD;
+}
+
+div {
+    font-family: "Courier New", monospace;
+    font-size: 17pt;
+    max-width: 80vw;
+}
+
+.center {
+    margin: auto;
+    width: fit-content;
+    height: fit-content;
+}
+
+canvas {
+    max-width: 60vw;
+    margin-top: 15vh;
+}
