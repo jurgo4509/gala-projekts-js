@@ -1,6 +1,4 @@
-// Cookie decoder no w3schools
-
-function getCookie(cname){
+function getCookie(cname){      // Cookie dekodētājs no https://www.w3schools.com/js/js_cookies.asp
     let name = cname + "=";
     let decodedCookie = decodeURIComponent(document.cookie);
     let ca = decodedCookie.split(';');
@@ -16,10 +14,7 @@ function getCookie(cname){
     return "";
 }
 
-
-// ielādē krāsas no saglabātā cookie
-
-switch(getCookie("lightmode")){
+switch(getCookie("lightmode")){     // ielādē iestatījumus no saglabātā cookie
     case "0":
         var clockColor = '#0F0';
         var backgroundColor = '#000';
@@ -32,9 +27,7 @@ switch(getCookie("lightmode")){
         break;
 }
 
-// background krāsas nomaiņa pēc iestatījumiem
-
-window.addEventListener("load",function() { changeColors(backgroundColor, clockColor) });
+window.addEventListener("load",function() { changeColors(backgroundColor, clockColor) });   // iestata background krāsu ielādējot mājaslapu
 
 let canvas = document.getElementById("clockcanva");
 let ctx = canvas.getContext("2d");
@@ -66,28 +59,25 @@ let months = [
 ];
 
 
-function colorMode(){
+function colorMode(){   // iestata pretējo lapas stila režīmu un saglabā to cookie kad tiek nospiesta poga 
     let lm;
-
     if(getCookie("lightmode") == "1"){
         lm = 0;
     }
     else {
         lm = 1;
     }
-
     document.cookie = "lightmode=" + lm + "; expires=Thu, 18 Mar 2027 12:00:00 UTC; path=/; SameSite=Lax";
-
     switch(getCookie("lightmode")){
         case "0":
             clockColor = '#0F0';
             backgroundColor = '#000';
-            console.log("Light mode DISABLED");
+            // console.log("Light mode DISABLED");
             break;
         case "1":
             clockColor = '#000000';
             backgroundColor = '#FFFDDD';
-            console.log("Light mode ENABLED");
+            // console.log("Light mode ENABLED");
             break;
     }
     changeColors(backgroundColor, clockColor);
@@ -95,41 +85,28 @@ function colorMode(){
 
 
 function drawClock(){
-    const d = new Date();
+    const d = new Date();   // nolasa laiku (milisekundes, sekundes, minūtes un stundas)
     let ms = d.getMilliseconds();
     let sec = d.getSeconds();
     let min = d.getMinutes();
     let hr = d.getHours();
 
-    ctx.fillStyle = clockColor;
+    ctx.fillStyle = clockColor;     // iestata krāsas
     ctx.strokeStyle = clockColor;
 
-    ctx.setTransform(1, 0, 0, 1, 175, 175);
+    ctx.setTransform(1, 0, 0, 1, 175, 175);  // novieto canvas sākumpunktu centrā un notīra canvu
     ctx.clearRect(-175,-175,350,350);
     
-    // clock outline
+    ctx.beginPath();   // uzzīmē pulksteņa ārmalu
+    ctx.arc(0,0,170,0,2*Math.PI);
+    ctx.lineWidth = 7;
+    ctx.stroke();
 
-
-    // ctx.beginPath();
-    // ctx.arc(0,0,170,0,2*Math.PI);
-    // ctx.lineWidth = 10;
-    // ctx.stroke();
-
-
-    // little dot in center
-
-    ctx.beginPath();
-    ctx.arc(0,0,5,0,2*Math.PI);
+    ctx.beginPath();    // uzzīmē punktu centrā
+    ctx.arc(0,0,8,0,2*Math.PI);
     ctx.fill();
 
-
-    // move origin to center
-
-    
-
-    // draw larger 'thingies'
-
-    for(let i = 0; i < 12; i++){
+    for(let i = 0; i < 12; i++){    // uzzīmē lielās iedaļas uz pulksteņa
         ctx.rotate(30 * Math.PI / 180);
         ctx.beginPath();
         ctx.lineWidth = "6";
@@ -138,10 +115,7 @@ function drawClock(){
         ctx.stroke();
     }
 
-
-    // draw smaller 'thingies'
-
-    for(let i = 0; i < 60; i++){
+    for(let i = 0; i < 60; i++){  // uzzīmē mazās iedaļas uz pulksteņa
         ctx.rotate(6 * Math.PI / 180);
         ctx.beginPath();
         ctx.lineWidth = "2";
@@ -149,34 +123,25 @@ function drawClock(){
         ctx.lineTo(162,0);
         ctx.stroke();
     }
-
-    // draw and rotate hour hand
     
-    ctx.setTransform(1, 0, 0, 1, 175, 175);
+    ctx.setTransform(1, 0, 0, 1, 175, 175); // uzzīmē un rotē stundu rādītāju
     ctx.rotate((hr + min / 60) * 30 * Math.PI / 180);
     ctx.fillRect(-5,0,10,-90)
 
-    // draw and rotate minute hand
-
-    ctx.setTransform(1, 0, 0, 1, 175, 175);
+    ctx.setTransform(1, 0, 0, 1, 175, 175); // uzzīmē un rotē minūšu rādītāju
     ctx.rotate((min + sec / 60) * 6 * Math.PI / 180);
     ctx.fillRect(-5,0,10,-120)
 
-    // draw and rotate second hand
-
-    ctx.fillStyle = "#FF0000";
-
+    ctx.fillStyle = "#FF0000";  // uzzīmē mazo sarkano punktu centrā
     ctx.beginPath();
-    ctx.arc(0,0,3,0,2*Math.PI);
+    ctx.arc(0,0,4,0,2*Math.PI);
     ctx.fill();
 
-    ctx.setTransform(1, 0, 0, 1, 175, 175);
+    ctx.setTransform(1, 0, 0, 1, 175, 175); // uzzīmē un rotē sekunžu rādītāju
     ctx.rotate((sec + ms/1000) * 6 * Math.PI / 180);
     ctx.fillRect(-2,0,4,-130)
 
-    // datuma galotne (1st, 2nd, 3rd, 4th)    
-    
-    switch(d.getDate){
+    switch(d.getDate){  // datuma galotne (1st, 2nd, 3rd, 4th)    
         case 1:
             var dayEnd = "st";
             break;
@@ -190,11 +155,7 @@ function drawClock(){
             var dayEnd = "th";
             break;
     }
-
-
-   // laika izvade teksta formā
-
-    datums.innerHTML =
+    datums.innerHTML =     // laika izvade teksta formā
     weekday[d.getDay()] + " " +
     d.getDate() + dayEnd + " " +
     months[d.getMonth()] + " " +
@@ -204,10 +165,11 @@ function drawClock(){
     (String(sec).padStart(2, '0'));
 }
 
-function changeColors(bgColor, altColor) {
+
+function changeColors(bgColor, altColor) {  // krāsu maiņas funkcija
     document.body.style.background = bgColor;
     document.getElementById("datums").style.color = altColor;
 }
 
-// zīmē pulksteni ik pēc 16ms, (60 reizes sekundē)
-setInterval(drawClock, 16);
+
+setInterval(drawClock, 16); // zīmē pulksteni ik pēc 16ms, (60 reizes sekundē)
