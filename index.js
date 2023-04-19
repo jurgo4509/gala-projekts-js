@@ -1,3 +1,12 @@
+// let clockColor = '#000000';
+// let backgroundColor = 'FFFDDD';
+
+let clockColor = '#0F0';
+let backgroundColor = '#000';
+
+// background krāsas nomaiņa pēc iestatījumiem
+window.addEventListener("load",function() { changeColors(backgroundColor, clockColor) });
+
 let canvas = document.getElementById("clockcanva");
 let ctx = canvas.getContext("2d");
 ctx.translate(175, 175);
@@ -27,8 +36,6 @@ let months = [
     "December"
 ];
 
-let dayEnd;
-
 function drawClock(){
     const d = new Date();
     let ms = d.getMilliseconds();
@@ -36,17 +43,19 @@ function drawClock(){
     let min = d.getMinutes();
     let hr = d.getHours();
 
-    ctx.fillStyle = "#000000";
+    ctx.fillStyle = clockColor;
+    ctx.strokeStyle = clockColor;
 
     ctx.setTransform(1, 0, 0, 1, 175, 175);
     ctx.clearRect(-175,-175,350,350);
     
     // clock outline
 
-    ctx.beginPath();
-    ctx.arc(0,0,170,0,2*Math.PI);
-    ctx.lineWidth = 10;
-    ctx.stroke();
+
+    // ctx.beginPath();
+    // ctx.arc(0,0,170,0,2*Math.PI);
+    // ctx.lineWidth = 10;
+    // ctx.stroke();
 
 
     // little dot in center
@@ -111,16 +120,16 @@ function drawClock(){
     
     switch(d.getDate){
         case 1:
-            dayEnd = "st";
+            var dayEnd = "st";
             break;
         case 2:
-            dayEnd = "nd";
+            var dayEnd = "nd";
             break;
         case 3:
-            dayEnd = "rd";
+            var dayEnd = "rd";
             break;
         default: 
-            dayEnd = "th";
+            var dayEnd = "th";
             break;
     }
 
@@ -133,6 +142,11 @@ function drawClock(){
     hr + ':' +
     (String(min).padStart(2, '0')) + ':' +
     (String(sec).padStart(2, '0'));
+}
+
+function changeColors(bgColor, altColor) {
+    document.body.style.background = bgColor;
+    document.getElementById("datums").style.color = altColor;
 }
 
 // drawClock();

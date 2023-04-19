@@ -14,7 +14,11 @@ div {
     height: fit-content;
 }
 
-canvas {
+#clockcanva {
     max-width: 60vw;
     margin-top: 15vh;
+}
+
+#datums {
+    color: red;
 }
