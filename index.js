@@ -14,16 +14,19 @@ function getCookie(cname){      // Cookie dekodētājs no https://www.w3schools.
     return "";
 }
 
+let clockColor = '#000000';
+let backgroundColor = '#FFFDDD';
+
 switch(getCookie("lightmode")){     // ielādē iestatījumus no saglabātā cookie
     case "0":
-        var clockColor = '#0F0';
-        var backgroundColor = '#000';
-        console.log("Light mode DISABLED");
+        clockColor = '#0F0';
+        backgroundColor = '#000';
+        // console.log("Light mode DISABLED");
         break;
     case "1":
-        var clockColor = '#000000';
-        var backgroundColor = '#FFFDDD';
-        console.log("Light mode ENABLED");
+        clockColor = '#000000';
+        backgroundColor = '#FFFDDD';
+        // console.log("Light mode ENABLED");
         break;
 }
 
