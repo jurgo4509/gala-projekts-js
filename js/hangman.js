@@ -16,6 +16,93 @@ guessing.innerHTML = guessOutput;
 
 addEventListener("keypress", letterEntered);
 
+let clockColor = '#000';    // noklusējuma krāsas
+let backgroundColor = '#F8F2DC';
+let secondColor = '#F00';
+
+switch(getCookie("styleInt")){     // ielādē iestatījumus no saglabātā cookie
+    case "0":
+        clockColor = '#000';
+        backgroundColor = '#F8F2DC';
+        secondColor = '#F00';
+        break;
+    case "1":
+        clockColor = '#FFF';
+        backgroundColor = '#070d23';
+        secondColor = '#0FF';
+        break;
+    case "2":
+        clockColor = '#0F0';
+        backgroundColor = '#000';
+        secondColor = '#F00';
+        break;
+}
+
+window.addEventListener("load",changeColors(backgroundColor, clockColor, getCookie("styleInt")));   // iestata background krāsu ielādējot mājaslapu
+
+
+function changeColors(bgColor, altColor, selectedStyle) {  // krāsu maiņas funkcija
+    document.body.style.background = bgColor;
+    let Buttons = document.querySelectorAll("#modeButton");
+    for(let i = 0; i < Buttons.length; i++) {
+        Buttons[i].classList.remove('.poga-style0','poga-style1','poga-style2');
+        Buttons[i].classList.add('poga-style' + selectedStyle);
+    }
+}
+
+
+function getCookie(cname){      // Cookie dekodētājs no https://www.w3schools.com/js/js_cookies.asp
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for(let i = 0; i <ca.length; i++) {
+      let c = ca[i];
+      while(c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if(c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+}
+
+
+function colorMode(){   // iestata nākamo lapas stila režīmu un saglabā to cookie kad tiek nospiesta poga 
+    let styleSelector = parseInt(getCookie("styleInt"));
+    if(styleSelector < 2){
+        styleSelector++;
+    }
+    else{
+        styleSelector = 0;
+    }
+    switch(styleSelector){
+        case 0:
+            clockColor = '#000';
+            backgroundColor = '#F8F2DC';
+            secondColor = '#F00';
+            break;
+        case 1:
+            clockColor = '#FFF';
+            backgroundColor = '#070d23';
+            secondColor = '#0FF';
+            break;
+        case 2:
+            clockColor = '#0F0';
+            backgroundColor = '#000';
+            secondColor = '#F00';
+            break;
+    }
+    changeColors(backgroundColor, clockColor, styleSelector);
+    let now = new Date();
+    let time = now.getTime();
+    let expireDate = time + 365 * 24 * 60 * 60 * 1000;
+    now.setTime(expireDate);
+    document.cookie = "styleInt=" + styleSelector + 
+    "; expires=" + now.toUTCString() + 
+    "path=/; SameSite=Lax";
+}
+
 
 function resetGame(status){
     switch(status){

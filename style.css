@@ -60,3 +60,12 @@ body {
 .poga-style2:hover {
     background-color: #ffffff3f;
 }
+
+.hangmanCanvas {
+    border: 3px dashed black
+}
+
+.wordGuess {
+    font-size:40px;
+    letter-spacing: 10px;
+}

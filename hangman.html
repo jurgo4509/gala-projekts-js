@@ -1,20 +1,34 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>Hangman</title>
-  <link href="hangman.css" rel="stylesheet" type="text/css" />
-  <link rel="icon" type="image/x-icon" href="/content/stagea-pfp.png">
-</head>
-<body>
-    <canvas id="canvo" width="400" height="500" class="hangmanCanvas"></canvas> 
-    <p>Minētie burti: <span id="wrong"></span></p>
-    <p id="guessing"class="wordGuess"> </p>
-    <input type="text" id="inputType" name="Guess" maxlength="1">
-    <script src="js/hangman.js"></script>
-</body>
+    <head>
+        <title>Hangman</title>
+        <meta content="Joske" name="author">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <link href="style.css" rel="stylesheet" type="text/css" />
+        <link rel="icon" type="image/x-icon" href="/content/stagea-pfp.png">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div class="center">
+            <canvas id="canvo" width="400" height="500" class="hangmanCanvas"></canvas> 
+        </div>
+        <div class="center">
+            <p>Minētie burti: <span id="wrong"></span></p>
+        </div>
+        <div class="center">
+            <p id="guessing"class="wordGuess"> </p>
+        </div>
+        <div id="inputField" class="center">
+            <input type="text" id="inputType" name="Guess" maxlength="1">
+        </div>
+        <div class="center">
+            <button id="modeButton" class="poga-style0" onclick="colorMode()">Color</button>
+            <a href="index.html"> <button id="modeButton" class="poga-style0">Clock</button></a>
+        </div>
+        <script src="js/hangman.js"></script>
+    </body>
 
 </html>
 
