@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200&display=swap');
+
 div {
-    font-family: "Courier New", monospace;
+    font-family: 'Inconsolata', monospace;
     font-size: 17pt;
     max-width: 80vw;
 }
@@ -17,7 +19,7 @@ div {
 
 button {
     border: none;
-    font-family: "Courier New", monospace;
+    font-family: 'Inconsolata', monospace;
     font-size: 15pt;
     padding: 7px 20px;
 }

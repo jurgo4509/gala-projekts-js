@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
     <head>
         <title>Hangman</title>
@@ -27,4 +27,30 @@
         </div>
         <script src="js/hangman.js"></script>
     </body>
+</html> -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Hangman</title>
+  <link href="hangman.css" rel="stylesheet" type="text/css" />
+</head>
+
+    <body>
+    <p id="wrong">Minētie burti: </p>
+    <canvas id="canvo" width="400" height="500" class="hangmanCanvas">
+        
+    </canvas> 
+    <p> <button onclick="Game()">Nepareizi</button> </p>
+    <p> <button onclick="drawHangman()">Test</button> </p>
+    <p> <button onclick="checkWord()">Letter</button> </p>
+    <p id="guessing"class="wordGuess"> </p>
+    <input type="text" id="inputType" name="Guess" maxlength="1">
+    
+  <script src="js/hangman.js"></script>
+</body>
+
 </html>
