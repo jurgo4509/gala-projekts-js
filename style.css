@@ -66,6 +66,19 @@ body {
 }
 
 .wordGuess {
+    margin: 10px;
     font-size:40px;
     letter-spacing: 10px;
+}
+
+#inputType {
+    width: 150px;
+    background-color: #0000000F;
+    border: none;
+    text-align: center;
+    border-bottom: black 2px inset;
+}
+
+#inputField {
+    padding: 20px;
 }

@@ -43,6 +43,9 @@ window.addEventListener("load",changeColors(backgroundColor, clockColor, getCook
 
 function changeColors(bgColor, altColor, selectedStyle) {  // krāsu maiņas funkcija
     document.body.style.background = bgColor;
+    document.getElementById("inputType").style.color = altColor;
+    document.getElementById("p1").style.color = altColor;
+    document.getElementById("guessing").style.color = altColor;
     let Buttons = document.querySelectorAll("#modeButton");
     for(let i = 0; i < Buttons.length; i++) {
         Buttons[i].classList.remove('.poga-style0','poga-style1','poga-style2');
