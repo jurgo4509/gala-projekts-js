@@ -6,6 +6,16 @@ div {
     max-width: 80vw;
 }
 
+#flexbox {
+    padding-top: 70px;
+    display: flex;
+    gap: 100px;
+}
+
+#flexor {
+    max-width: 159px;
+}
+
 .center {
     margin: auto;
     width: fit-content;
@@ -59,10 +69,6 @@ body {
 
 .poga-style2:hover {
     background-color: #ffffff3f;
-}
-
-.hangmanCanvas {
-    border: 3px dashed black
 }
 
 .wordGuess {

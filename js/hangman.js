@@ -1,6 +1,16 @@
+if(document.cookie == ""){
+    let x = new Date();
+    let t = x.getTime();
+    let expire = t + 365 * 24 * 60 * 60 * 1000;
+    x.setTime(expire);
+    document.cookie = "styleInt=" + 0 + 
+    "; expires=" + x.toUTCString() + 
+    "path=/; SameSite=Lax";
+}
+
 let canvas = document.getElementById("canvo");
 let ctx = canvas.getContext("2d");
-let wrongAnswer = 0;
+let wrongAnswer = 1;
 const Words = ["apple", "berry", "cherry", "grape", "lemon", "lime", "mango", "peach", "pear", "plum", "banana", "carrot", "celery", "onion", "tomato", "pasta", "rice", "toast", "pizza", "burger", "salad", "sushi", "bagel", "croissant", "donut", "cheese", "chips", "pretzel", "cookie", "brownie", "fudge", "candy", "sugar", "honey", "jam", "syrup", "coffee", "juice", "tea", "water", "soda", "beer", "wine", "whiskey", "vodka", "gin", "rum", "tequila", "brandy", "bacon", "beef", "chicken", "pork", "fish", "shrimp", "clam", "crab", "lobster", "steak", "sausage", "hotdog", "ham", "turkey", "bacon", "beans", "corn", "peas", "potato", "rice", "salmon", "tuna", "trout", "carrot", "pepper", "onion", "garlic", "herbs", "spice", "salt", "pepper", "sugar", "flour", "butter", "oil", "vinegar", "cheese", "milk", "yogurt", "egg", "bread", "pasta", "soup", "stew", "sauce", "gravy", "dip", "chips", "cracker", "bread", "cake", "pie", "cookie", "brownie", "pudding", "icecream"];
 const alphabet = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
 let guessedLetters = [];
@@ -128,7 +138,7 @@ function resetGame(status){
 function actuallyResetGame(){
     console.log("SA*UFHGWUIKDGB");
     ctx.clearRect(0,0,400,500);
-    wrongAnswer = 0;
+    wrongAnswer = 1;
     guessedLetters = [];
     randomIndex = Math.floor(Math.random() * Words.length);
     word = Words[randomIndex].toUpperCase();
@@ -171,7 +181,8 @@ function letterEntered(kad) {
                 }
             }
             if(!letterCheck){
-                dead();
+                wrongAnswer++;
+                dead(wrongAnswer);
                 guessedLetters.push(Input);
             } 
         }
@@ -184,41 +195,28 @@ function letterEntered(kad) {
 }
 
 
-function dead() {
-    wrongAnswer++;
-    switch (wrongAnswer) {
+function dead(lives) {
+    ctx.clearRect(0,0,300,450);
+    for(let i = 0; i < lives; i++){
+        switch(i) {
     // Frame
         case 1:
-            ctx.beginPath();
-            ctx.lineWidth = 5
-            ctx.strokeStyle = "#B27C66"
-            ctx.moveTo(75,450);
-            ctx.lineTo(75,45);
-            ctx.stroke();
+            ctx.fillRect(0, 0, 10, 350);
             break;
         case 2:
-            ctx.beginPath();
-            ctx.moveTo(75,47.5);
-            ctx.lineTo(325,47.5);
-            ctx.stroke();
+            ctx.fillRect(0, 0, 300, 10);
             break;
         case 3:
-            ctx.beginPath();
-            ctx.moveTo(322.5,47.7);
-            ctx.lineTo(322.5,450);
-            ctx.stroke();
+            ctx.fillRect(290, 0, 10, 350);
             break;
         case 4:
-            ctx.beginPath();
-            ctx.moveTo(200,45);
-            ctx.lineTo(200,100);
-            ctx.stroke();
+            ctx.fillRect(145, 0, 10, 50);
             break;
     // Head
         case 5:
             ctx.beginPath();
             ctx.strokeStyle = "#000000"
-            ctx.arc(200, 125, 25, 0, 2 * Math.PI);
+            ctx.arc(calc(350/2), 125, 25, 0, 2 * Math.PI);
             ctx.stroke();
             break;
     // Body
@@ -255,5 +253,6 @@ function dead() {
             ctx.stroke();
             resetGame(0);
             break;
+    }
     }
 }
