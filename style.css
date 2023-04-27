@@ -72,17 +72,19 @@ body {
 }
 
 .wordGuess {
+    padding-top: 40px;
     margin: 10px;
     font-size:40px;
     letter-spacing: 10px;
 }
 
 #inputType {
-    width: 150px;
-    background-color: #0000000F;
+    font-family: 'Inconsolata', monospace;
+    width: 100px;
+    font-size: 50px;
     border: none;
     text-align: center;
-    border-bottom: black 2px inset;
+    border-bottom: black 3px dotted;
 }
 
 #inputField {
