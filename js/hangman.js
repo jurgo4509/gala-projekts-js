@@ -133,6 +133,7 @@ function resetGame(status){
             ctx.moveTo(75,40);
             ctx.lineTo(225,310);
             ctx.stroke();
+            guessing.innerHTML = word;
             setTimeout(function() {actuallyResetGame();}, 2000);
             break;
         case 1:
@@ -199,6 +200,9 @@ function letterEntered(kad) {
                 wrongAnswer++;
                 dead(wrongAnswer);
                 guessedLetters.push(Input);
+                if(wrongAnswer == 11){
+                    return 0;
+                }
             } 
         }
         guessing.innerHTML = guessOutput;
